@@ -6,19 +6,7 @@ const check = require('../config/check.js');
 
 const moment = require('moment');
 
-module.exports = {
-    'GET /api/all': async (ctx, next) => {
-        ctx.response.type = 'application/json';
-        await userModel.findAllName()  //查询数据库
-        .then(result => {
-            ctx.response.body = {   // 设置Response Body
-                result: result
-            };
-            console.log(result)
-        })
-        .catch(err => console.log(err));
-    },
-
+module.exports = {  
     'POST /api/users/signup': async (ctx, next) => {
         ctx.response.type = 'application/json';
         // console.log(ctx.request.body);
@@ -106,8 +94,7 @@ module.exports = {
         ctx.body = 'true'
     },
 
-    //这里应该写成/api/users/:user_id
-    'GET /api/users': async (ctx, next) => {
+    'GET /api/users': async (ctx, next) => {  // 这里应该写成/api/users/:user_id
         let username = ''
         await check.checkToken(ctx)
         .then(name => {
@@ -122,15 +109,19 @@ module.exports = {
         })
         .catch(err => console.log(err));
     },
+
+    'POST /api/users/:user_id': async (ctx, next) => {  // 修改个人资料
+        // await userModel.
+    },
     
-    //获取个人签名
+    //获取个人动态列表
     'GET /api/users/posts/:user_id': async (ctx, next) => {
 
     },
 
-    //发表个人签名
+    //发表个人动态
     'POST /api/users/posts/:user_id': async (ctx, next) => {
-
+        
     },
 
     //获取首页游戏列表
@@ -148,5 +139,21 @@ module.exports = {
         
     },
 
-    
+    /**
+     * 后台管理API
+     * 
+    */
+
+    // 查询所有用户
+    'GET /api/users/all': async (ctx, next) => {
+        ctx.response.type = 'application/json';
+        await userModel.findAllName()  //查询数据库
+        .then(result => {
+            ctx.response.body = {   // 设置Response Body
+                result: result
+            };
+            console.log(result)
+        })
+        .catch(err => console.log(err));
+    }
 }
