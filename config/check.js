@@ -1,10 +1,11 @@
 const jwt = require('jsonwebtoken');  //用于生成token
 const config = require('./default.js');
 
-function signToken(name){
+function signToken(name,id){
     console.log(name)
     const token = jwt.sign({
         name,
+        id
     }, config.jwt_secret, {expiresIn: 3600});
     return token;
 }
@@ -22,7 +23,10 @@ async function checkToken(ctx){
     console.log('...')
     const decoded = jwt.decode(t, {complete: true});
     console.log(decoded)
-    return decoded.payload.name;
+    return {
+        name:decoded.payload.name,
+        id:decoded.payload.id
+    };
 }
 
 module.exports = {
