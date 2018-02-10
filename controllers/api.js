@@ -113,10 +113,6 @@ module.exports = {
             .catch(err => console.log(err));
     },
 
-    'POST /api/users/:user_id': async (ctx, next) => {  // 修改个人资料
-        // await userModel.
-    },
-
     'POST /api/users/posts/:user_id': async (ctx, next) => {  // 发表个人动态
         const
             post = {
@@ -160,15 +156,37 @@ module.exports = {
             .catch(err => console.log(err))
     },
 
-    'GET /api/game': async (ctx, next) => {  // 获取首页游戏列表
+    'POST /api/users/posts/:post_id': async (ctx, next) => {  // 获取个人动态详情
+
+    },
+
+    'DELETE /api/users/posts/:post_id': async (ctx, next) => {  // 删除个人动态
+        console.log(ctx.request.body)
+        await userModel.deletePost(post_id)
+            .then(result => {
+                const res = JSON.parse(JSON.stringify(result))
+                console.log(res)
+                ctx.body = {
+                    status: 1,
+                    success: '删除动态成功'
+                }
+            })
+            .catch(err => console.log(err))
+    },
+
+    'POST /api/users/:user_id': async (ctx, next) => {  // 修改个人资料
+        // await userModel.
+    },
+
+    'GET /api/game': async (ctx, next) => {  // 获取游戏列表
         // 
     },
 
-    'GET /api/game/category': async (ctx, next) => {  // 获取游戏种类
+    'GET /api/category': async (ctx, next) => {  // 获取游戏种类
         //
     },
 
-    'GET /api/detail/:game_name': async (ctx, next) => {  // 获取游戏详情
+    'GET /api/game/:game_id': async (ctx, next) => {  // 获取游戏详情
         //
     },
 
