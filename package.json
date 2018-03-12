@@ -17,7 +17,7 @@
     "koa-mysql-session": "0.0.2",
     "koa-router": "^7.3.0",
     "koa-session-minimal": "^3.0.4",
-    "moment": "^2.19.2",
+    "moment": "^2.21.0",
     "mysql": "^2.15.0"
   }
 }
