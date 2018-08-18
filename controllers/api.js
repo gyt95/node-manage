@@ -179,7 +179,12 @@ module.exports = {
     },
 
     'GET /api/game': async (ctx, next) => {  // 获取游戏列表
-        // 
+        await userModel.findGameList()
+            .then(res => {
+                console.log(res)
+                ctx.body = res;
+            })
+            .catch(err => console.log(err))
     },
 
     'GET /api/category': async (ctx, next) => {  // 获取游戏种类

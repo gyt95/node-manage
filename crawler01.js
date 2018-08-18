@@ -2,7 +2,7 @@
  * @Author: gyt95.kwan 
  * @Date: 2018-08-16 23:39:50 
  * @Last Modified by: gyt95.kwan
- * @Last Modified time: 2018-08-16 23:40:14
+ * @Last Modified time: 2018-08-18 23:56:41
  */
 
 // 爬取游戏基本信息
@@ -14,7 +14,7 @@ let db = mysql.createConnection({
     host:     'localhost',
     user:     'root',
     password: '123456',
-    database: 'spider_test'
+    database: 'koa2sql'
 });
 db.connect()
 
@@ -53,11 +53,11 @@ function show(page){
                         console.log('数据库连接错误')
                     }else{
                         page++;
-                        if(page <= 4){
+                        if(page <= 5){
                             show(page)
                         }else{
                             // db.end()
-                            console.log('爬取结束...')
+                            console.log(page,'爬取结束...')
                         }
                     }
                 })

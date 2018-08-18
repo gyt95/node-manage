@@ -13,7 +13,8 @@ app.use(jwt({secret: config.jwt_secret}).unless(
     {
         path:[
         /^\/api\/users\/signin/, 
-        /^\/api\/users\/signup/]
+        /^\/api\/users\/signup/,
+        /^\/api\/game/]
     }
 ))
 
