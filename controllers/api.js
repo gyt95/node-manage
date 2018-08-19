@@ -128,7 +128,6 @@ module.exports = {
             ctx.request.body.user_id
         ])
             .then(result => {
-                console.log('???')
                 const res = JSON.parse(JSON.stringify(result))
                 console.log(res)
             })
@@ -162,7 +161,7 @@ module.exports = {
 
     'DELETE /api/users/posts/:post_id': async (ctx, next) => {  // 删除个人动态
         console.log(ctx.request.body)
-        await userModel.deletePost(post_id)
+        await userModel.deletePost(ctx.request.body.post_id)
             .then(result => {
                 const res = JSON.parse(JSON.stringify(result))
                 console.log(res)
@@ -175,14 +174,18 @@ module.exports = {
     },
 
     'POST /api/users/:user_id': async (ctx, next) => {  // 修改个人资料
-        // await userModel.
+        // 
     },
 
     'GET /api/game': async (ctx, next) => {  // 获取游戏列表
         await userModel.findGameList()
             .then(res => {
                 console.log(res)
-                ctx.body = res;
+                ctx.body = {
+                    status: 1,
+                    success: '获取首页数据成功',
+                    data: res
+                }
             })
             .catch(err => console.log(err))
     },
